@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Type Ahead 👀</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <form class="search-form">
+    <input type="text" class="search" placeholder="City or State">
+    <ul class="suggestions">
+      <li>Filter for a city</li>
+      <li>or a state</li>
+    </ul>
+  </form>
+  <script>
+    const endpoint =
+      'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+
+    // const xhr = new XMLHttpRequest();
+    // xhr.addEventListener('load', function () {
+    //   console.log(JSON.parse(this.response));
+    // })
+    // xhr.open('GET', endpoint);
+    // xhr.send();
+    let cities = [];
+    fetch(endpoint)
+      .then(r =>
+        r.json())
+      .then(obj => {
+        cities = obj;
+        console.log(cities);
+      });
+
+    const search = document.querySelector(".search");
+    console.log(search);
+    search.addEventListener('keyup', displayHandler);
+
+    function matchHandler(wordToMatch, cities) {
+      return cities.filter(function (place) {
+        const re = new RegExp(wordToMatch, 'gi');
+        return place.city.match(re) || place.state.match(re);
+      })
+    }
+
+    function displayHandler() {
+      const matchArray = matchHandler(this.value, cities);
+      console.log(matchArray);
+      const html = matchArray.map(place => {
+        const re = new RegExp(this.value, 'gi');
+        const cityName = place.city.replace(re, `<span class="hl">${this.value}</span>`);
+        const stateName = place.state.replace(re, `<span class="hl">${this.value}</span>`);
+
+        return `
+      <li>
+        <span class="name">${cityName}, ${stateName}</span>
+      </li>
+    `;
+
+      }).join('');
+      document.querySelector('.suggestions').innerHTML = html;
+      console.log(html);
+    }
+  </script>
+</body>
+
+</html>
