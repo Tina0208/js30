@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Console Tricks!</title>
+</head>
+
+<body>
+
+  <p class="good" onClick="makeGreen()">×BREAK×DOWN×</p>
+
+  <script>
+    const dogs = [{
+      name: 'Snickers',
+      age: 2
+    }, {
+      name: 'hugo',
+      age: 8
+    }];
+
+    function makeGreen() {
+      const p = document.querySelector('p');
+      p.style.color = '#BADA55';
+      p.style.fontSize = '50px';
+    }
+
+    let console = {
+      isDev: true
+      log(...args) {
+        if (this.isDev) {
+          window.console.log(...args)
+        }
+      },
+      warn(...args) {
+        if (this.isDev) {
+          window.console.warn(...args)
+        }
+      },
+      error(...args) {
+        if (this.isDev) {
+          window.console.error(...args)
+        }
+      },
+      assert(...args) {
+        if (this.isDev) {
+          window.console.assert(...args)
+        }
+      },
+      clear() {
+        if (this.isDev) {
+          window.console.clear()
+        }
+      },
+      count(...args) {
+        if (this.isDev) {
+          window.console.count(...args)
+        }
+      },
+      dir(...args) {
+        if (this.isDev) {
+          window.console.dir(...args)
+        }
+      },
+      groupCollapsed(...args) {
+        if (this.isDev) {
+          window.console.groupCollapsed(...args)
+        }
+      },
+      groupEnd(...args) {
+        if (this.isDev) {
+          window.console.groupEnd(...args)
+        }
+      },
+      time(...args) {
+        if (this.isDev) {
+          window.console.groupEnd(...args)
+        }
+      },
+      timeEnd(...args) {
+        if (this.isDev) {
+          window.console.groupEnd(...args)
+        }
+      },
+
+
+
+    }
+
+    // Regular
+    console.log(123);
+
+    // Interpolated
+    console.log('My name is %s', 'TINA');
+
+    // Styled
+    console.log('%c住手', 'color: red;font-size: 24px');
+    //語法:'%C要改變的文字'，'css樣式'
+
+    // warning!
+    console.warn("warnning!!!")
+
+    // Error :|
+    console.error("Shit!!")
+
+    // Info
+    //和log差不多
+
+    // Testing
+    const p = document.querySelector('p');
+    console.assert(p.classList.contains("gogo"), "That is wrong")
+    console.assert(p.classList.contains("good"), "That is correct")
+
+    // clearing
+    console.clear();
+
+    // Viewing DOM Elements
+    console.log(p) //查看element
+    console.dir(p) //查看屬性
+
+    // Grouping together
+    dogs.forEach((dog) => {
+      console.groupCollapsed(`${dog.name}`);
+      console.log(`This is ${dog.name}`);
+      console.log(`${dog.name} is ${dog.age} years old`);
+      console.log(`${dog.name} is ${dog.age * 7} dog years old`);
+      console.groupEnd(`${dog.name}`);
+    })
+
+    // counting
+    console.count('Wes');
+    console.count('Wes');
+    console.count('Steve');
+    console.count('Steve');
+    console.count('Wes');
+    console.count('Steve');
+    console.count('Wes');
+    console.count('Steve');
+    console.count('Steve');
+    console.count('Steve');
+    console.count('Steve');
+    console.count('Steve');
+
+
+    // timing
+    console.time('test')
+    for (let i = 0; i < 100000; i++) {
+      let j = i
+    }
+    console.timeEnd("test")
+  </script>
+</body>
+
+</html>
