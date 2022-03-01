@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Key Detection</title>
+  <script type="text/javascript" src="https://www.cornify.com/js/cornify.js"></script>
+</head>
+
+<body>
+  <script>
+    const secretCode = [87, 69, 83, 66, 79, 83];
+    const input = [];
+    window.addEventListener('keyup', function (e) {
+      input.push(e.keyCode)
+      input.splice(-secretCode.lenght - 1, input.length - secretCode.length)
+      //相當於以下判斷式
+      // if (input.length > secretCode.length) {
+      //   input.shift()
+      // }
+      if (input.join("|") === secretCode.join("|")) {
+        cornify_add();
+      }
+      console.log(e.keyCode)
+      console.log(secretCode)
+      console.log(input)
+    })
+  </script>
+</body>
+
+</html>
