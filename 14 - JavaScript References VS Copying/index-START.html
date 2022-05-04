@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>JS Reference VS Copy</title>
+</head>
+
+<body>
+
+  <script>
+    // start with strings, numbers and booleans
+
+    // let a = 'A';
+    // let b = a;
+    // a = "B"
+    // console.log(a); //B
+    // console.log(b); //A
+
+
+    // let c = 0;
+    // let d = c;
+    // c++;
+    // console.log(c,d) //1,0
+
+    // let e = true;
+    // let f = e;
+    // e = !f;
+    // console.log(e,f) //false , true
+
+    // Let's say we have an array
+    const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
+
+    let p1 = players.slice();
+    p1[0] = 'tina';
+    console.log(p1, players)
+
+    let p2 = [].concat(players);
+    p2[0] = 'merry';
+    console.log(p2,players)
+
+    let p3 = [...players];
+    p3[0] = 'John';
+    console.log(p3,players)
+
+    // and we want to make a copy of it.
+
+    // You might think we can just do something like this:
+
+    // however what happens when we update that array?
+
+    // now here is the problem!
+
+    // oh no - we have edited the original array too!
+
+    // Why? It's because that is an array reference, not an array copy. They both point to the same array!
+
+    // So, how do we fix this? We take a copy instead!
+
+    // one way
+
+    // or create a new array and concat the old one in
+
+    // or use the new ES6 Spread
+
+    // now when we update it, the original one isn't changed
+
+    // The same thing goes for objects, let's say we have a person object
+
+    // with Objects
+    const person = {
+      name: 'Wes Bos',
+      age: 80
+    };
+
+    let q1 = {...person};
+    q1.name = 'Tina';
+    console.log(q1,person)
+
+    let q2 = Object.assign({},person)
+    q2.name = 'Merry';
+    console.log(q2,person)
+    
+    let q3 = JSON.parse(JSON.stringify(person))
+    q3.name = 'John';
+    console.log(q3,person)
+    
+    // and think we make a copy:
+
+    // how do we take a copy instead?
+
+    // We will hopefully soon see the object ...spread
+
+    // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+  </script>
+
+</body>
+
+</html>
